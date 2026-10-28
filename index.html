@@ -2,33 +2,499 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>سایت من</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Tahoma, sans-serif;
-      background: #f4f7fb;
-    }
-    header {
-      background: #123b70;
-      padding: 20px;
-    }
-    a {
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-    }
-    main {
-      min-height: 85vh;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071426">
+<title>فوتبال‌دان | دنیای دانستنی‌های فوتبال</title>
+<meta name="description" content="فوتبال‌دان؛ رکوردها، تاریخچه، حقایق و دانستنی‌های جذاب دنیای فوتبال.">
+
+<style>
+:root {
+  --bg: #071426;
+  --panel: #10213a;
+  --panel2: #142944;
+  --gold: #f6c453;
+  --text: #f4f7fc;
+  --muted: #aabbd0;
+  --line: #263b56;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 2;
+}
+a { color: inherit; text-decoration: none; }
+.container { width: min(1100px, 92%); margin: auto; }
+
+header {
+  background: #09182b;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.brand {
+  font-size: 23px;
+  font-weight: 900;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.brand span { color: white; }
+nav { display: flex; gap: 20px; font-size: 13px; }
+nav a { color: var(--muted); }
+nav a:hover { color: var(--gold); }
+
+.hero {
+  padding: 54px 0 45px;
+  background:
+    radial-gradient(ellipse at 80% 0%, #18395b 0%, transparent 60%),
+    linear-gradient(135deg, #0c2038, #071426);
+  border-bottom: 1px solid var(--line);
+}
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid #6b572d;
+  border-radius: 30px;
+  color: var(--gold);
+  font-size: 12px;
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 46px);
+  line-height: 1.6;
+  margin: 17px 0 8px;
+}
+.hero h1 span { color: var(--gold); }
+.hero p { color: var(--muted); max-width: 620px; font-size: 14px; }
+.hero-btn {
+  display: inline-block;
+  margin-top: 12px;
+  background: var(--gold);
+  color: #172238;
+  padding: 9px 19px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+main { padding: 35px 0 60px; }
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.section-head h2 { font-size: 21px; margin: 0; }
+.section-head h2 span { color: var(--gold); }
+#search {
+  width: min(100%, 270px);
+  background: var(--panel);
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px 13px;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}
+#search:focus { border-color: var(--gold); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: transform .2s, border-color .2s;
+}
+.card:hover { transform: translateY(-3px); border-color: #92783e; }
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.category {
+  color: var(--gold);
+  font-size: 11px;
+  background: #263149;
+  border-radius: 5px;
+  padding: 3px 8px;
+}
+.card h3 { font-size: 17px; line-height: 1.9; margin: 13px 0 8px; }
+.card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 2.1;
+  margin: 0 0 17px;
+  overflow-wrap: anywhere;
+}
+.read {
+  margin-top: auto;
+  padding-top: 12px;
+  color: var(--gold);
+  font-size: 13px;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+  background: none;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  text-align: right;
+  font-family: inherit;
+}
+#status {
+  color: var(--muted);
+  text-align: center;
+  padding: 35px 10px;
+  font-size: 13px;
+}
+#retry {
+  display: none;
+  margin: 10px auto;
+  padding: 8px 15px;
+  background: var(--gold);
+  border: 0;
+  border-radius: 8px;
+  font-family: inherit;
+}
+footer {
+  border-top: 1px solid var(--line);
+  padding: 25px 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+}
+footer strong { color: var(--gold); }
+
+dialog {
+  width: min(680px, 92%);
+  max-height: 85vh;
+  overflow: auto;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 24px;
+  line-height: 2.2;
+}
+dialog::backdrop { background: #000b; }
+dialog h2 { color: var(--gold); font-size: 21px; }
+#article-body { overflow-wrap: anywhere; }
+#article-body p { color: #e0e8f2; }
+#article-body a { color: var(--gold); text-decoration: underline; }
+#article-body img { max-width: 100%; height: auto; }
+.close {
+  background: var(--gold);
+  border: 0;
+  border-radius: 7px;
+  padding: 7px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+@media (max-width: 750px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+  .card { padding: 14px; }
+  .card h3 { font-size: 15px; }
+  .nav { min-height: 62px; }
+  nav { gap: 11px; font-size: 11px; }
+  .brand { font-size: 19px; }
+}
+@media (max-width: 430px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding: 35px 0; }
+  .section-head { align-items: stretch; }
+  #search { width: 100%; }
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <a href="index.html">خانه</a>
-  </header>
-  <main></main>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">⚽ فوتبال<span>‌دان</span></a>
+    <nav>
+      <a href="#home">خانه</a>
+      <a href="#articles">مطالب فوتبال</a>
+      <a href="#about">درباره ما</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="container">
+    <span class="tag">⚽ دانش فوتبال، فراتر از زمین</span>
+    <h1>دنیای فوتبال را<br><span>بیشتر بشناس!</span></h1>
+    <p>
+      از رکوردهای تاریخی و لحظات فراموش‌نشدنی تا حقایق کمتر شنیده‌شده
+      فوتبال؛ اینجا هر مطلب، دریچه‌ای تازه به دنیای مستطیل سبز است.
+    </p>
+    <a class="hero-btn" href="#articles">مشاهده مطالب ←</a>
+  </div>
+</section>
+
+<main class="container" id="articles">
+  <div class="section-head">
+    <h2>📚 آخرین <span>مطالب فوتبال</span></h2>
+    <input id="search" type="search" placeholder="جست‌وجو در مطالب..." aria-label="جست‌وجو">
+  </div>
+
+  <div id="posts" class="grid"></div>
+  <div id="status">در حال دریافت مطالب فوتبال‌دان...</div>
+  <button id="retry" type="button">تلاش دوباره</button>
+</main>
+
+<footer id="about">
+  <div class="container">
+    <strong>⚽ فوتبال‌دان</strong>
+    <p>جایی برای عاشقان فوتبال و دانستنی‌های جذاب آن</p>
+    <span>© فوتبال‌دان</span>
+  </div>
+</footer>
+
+<dialog id="article">
+  <button class="close" id="closeArticle">بستن ✕</button>
+  <h2 id="article-title"></h2>
+  <div id="article-body"></div>
+</dialog>
+
+<script>
+const OWNER = "aaalllssskkkddjjffhhggg-wq";
+const REPO = "my-first-site";
+const POST_PATH = "content/posts";
+
+const postsElement = document.getElementById("posts");
+const statusElement = document.getElementById("status");
+const retryButton = document.getElementById("retry");
+const searchInput = document.getElementById("search");
+const articleDialog = document.getElementById("article");
+
+let allPosts = [];
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function getField(front, key) {
+  const pattern = new RegExp(
+    "^" + key + ":\\\\s*(.*)$",
+    "m"
+  );
+  const match = front.match(pattern);
+  if (!match) return "";
+  return match[1].trim().replace(/^['"]|['"]$/g, "");
+}
+
+function parsePost(raw, filename) {
+  let front = "";
+  let content = raw;
+
+  const match = raw.match(/^---\\s*\\r?\\n([\\s\\S]*?)\\r?\\n---\\s*\\r?\\n?/);
+
+  if (match) {
+    front = match[1];
+    content = raw.slice(match[0].length);
+  }
+
+  const title = getField(front, "title") ||
+                filename.replace(/\\.md$/i, "").replace(/-/g, " ");
+
+  const category = getField(front, "category") || "دانستنی فوتبال";
+
+  // پشتیبانی از فیلد body در تنظیمات Pages CMS
+  const bodyMatch = front.match(
+    /^body:\\s*[|>][-+]?\\s*\\r?\\n((?:[ \\t]+.*(?:\\r?\\n|$)|[ \\t]*\\r?\\n)*)/m
+  );
+
+  if (bodyMatch) {
+    content = bodyMatch[1]
+      .split(/\r?\n/)
+      .map(line => line.replace(/^ {1,}/, ""))
+      .join("\n")
+      .trim();
+  } else {
+    const inlineBody = front.match(/^body:\\s*(.+)$/m);
+    if (inlineBody && !inlineBody[1].match(/^[|>]/)) {
+      content = inlineBody[1].replace(/^['"]|['"]$/g, "");
+    }
+  }
+
+  return { title, category, body: content.trim() };
+}
+
+function markdownToHTML(text) {
+  // ابتدا تمام HTML ورودی پاک‌سازی می‌شود
+  let s = escapeHTML(text);
+
+  s = s.replace(/^### (.+)$/gm, "<h3>$1</h3>");
+  s = s.replace(/^## (.+)$/gm, "<h2>$1</h2>");
+  s = s.replace(/^# (.+)$/gm, "<h2>$1</h2>");
+  s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  s = s.replace(/\*(.+?)\*/g, "<em>$1</em>");
+  s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^ )]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+  return s.split(/\n\s*\n/).map(block => {
+    block = block.trim();
+    if (!block) return "";
+    if (/^<(h2|h3|ul|ol|li|blockquote)\b/.test(block)) return block;
+    return "<p>" + block.replace(/\n/g, "<br>") + "</p>";
+  }).join("");
+}
+
+function makeExcerpt(text) {
+  return text
+    .replace(/^---[\\s\\S]*?---/m, "")
+    .replace(/[#>*_`]/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 145);
+}
+
+function renderPosts() {
+  const query = searchInput.value.trim().toLowerCase();
+
+  const filtered = allPosts.filter(post =>
+    (post.title + " " + post.category + " " + post.body)
+      .toLowerCase().includes(query)
+  );
+
+  postsElement.innerHTML = "";
+
+  filtered.forEach(post => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const top = document.createElement("div");
+    top.className = "card-top";
+
+    const cat = document.createElement("span");
+    cat.className = "category";
+    cat.textContent = post.category;
+
+    const ball = document.createElement("span");
+    ball.textContent = "⚽";
+
+    top.append(cat, ball);
+
+    const heading = document.createElement("h3");
+    heading.textContent = post.title;
+
+    const excerpt = document.createElement("p");
+    excerpt.textContent = makeExcerpt(post.body) || "برای خواندن این مطلب وارد ادامه شوید.";
+
+    const button = document.createElement("button");
+    button.className = "read";
+    button.textContent = "ادامه مطلب ←";
+    button.addEventListener("click", () => {
+      document.getElementById("article-title").textContent = post.title;
+      document.getElementById("article-body").innerHTML = markdownToHTML(post.body);
+      articleDialog.showModal();
+    });
+
+    card.append(top, heading, excerpt, button);
+    postsElement.appendChild(card);
+  });
+
+  if (filtered.length === 0) {
+    statusElement.textContent = query
+      ? "مطلبی با این عبارت پیدا نشد."
+      : "هنوز مطلبی برای نمایش پیدا نشد. ابتدا یک مطلب در پنل مدیریت ثبت کن.";
+    statusElement.style.display = "block";
+  } else {
+    statusElement.style.display = "none";
+  }
+}
+
+async function loadPosts() {
+  statusElement.style.display = "block";
+  statusElement.textContent = "در حال دریافت مطالب فوتبال‌دان...";
+  retryButton.style.display = "none";
+  postsElement.innerHTML = "";
+
+  try {
+    const apiURL =
+      "https://api.github.com/repos/" + OWNER + "/" + REPO +
+      "/contents/" + POST_PATH;
+
+    const response = await fetch(apiURL, {
+      headers: { "Accept": "application/vnd.github+json" }
+    });
+
+    if (!response.ok) {
+      throw new Error("پوشه مطالب پیدا نشد یا دریافت مطالب ممکن نیست.");
+    }
+
+    const files = await response.json();
+
+    if (!Array.isArray(files)) {
+      throw new Error("پوشه مطالب قابل خواندن نیست.");
+    }
+
+    const markdownFiles = files.filter(file =>
+      file.type === "file" && /\.md$/i.test(file.name)
+    );
+
+    const results = await Promise.all(
+      markdownFiles.map(async file => {
+        const fileResponse = await fetch(file.download_url);
+        if (!fileResponse.ok) return null;
+        return parsePost(await fileResponse.text(), file.name);
+      })
+    );
+
+    allPosts = results.filter(post => post && post.title);
+    allPosts.reverse();
+
+    renderPosts();
+
+    if (allPosts.length === 0) {
+      statusElement.textContent =
+        "هنوز فایلی با پسوند MD در پوشه مطالب پیدا نشد. مسیر ذخیره‌سازی پنل باید بررسی شود.";
+      statusElement.style.display = "block";
+    }
+  } catch (error) {
+    statusElement.textContent =
+      "مطالب بارگذاری نشدند. اتصال اینترنت یا مسیر پوشه مطالب را بررسی کن.";
+    statusElement.style.display = "block";
+    retryButton.style.display = "block";
+  }
+}
+
+searchInput.addEventListener("input", renderPosts);
+retryButton.addEventListener("click", loadPosts);
+document.getElementById("closeArticle").addEventListener("click", () => {
+  articleDialog.close();
+});
+
+loadPosts();
+</script>
 </body>
 </html>
