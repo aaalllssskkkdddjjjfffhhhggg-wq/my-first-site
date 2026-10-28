@@ -1,0 +1,19 @@
+media: media
+content:
+  - name: posts
+    label: مطالب فوتبال‌دان
+    type: collection
+    path: content/posts
+    filename: "{primary}.md"
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: عنوان مطلب
+        type: string
+        required: true
+      - name: category
+        label: دسته‌بندی
+        type: string
+      - name: body
+        label: متن مطلب
+        type: rich-text
